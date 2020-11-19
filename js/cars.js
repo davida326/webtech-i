@@ -7,10 +7,23 @@ $(document).ready(function(){
     var $elerheto=$("#elerheto");
     var $gyartasiev=$("#gyartasiev");
     var $loero=$("#loero");
+    var manufacturerlist=[];
+    $.ajax({
+        type:"GET",
+        url: "https://webtechcars.herokuapp.com/api/manufacturers",
+        success: function(data){
+            for(var i in data) if($.inArray(data[i].name,manufacturerlist)==-1) manufacturerlist.push(data[i].name);
+            for(var i = 0;i<manufacturerlist.length;i++)
+            {
+                var o = new Option(manufacturerlist[i],manufacturerlist[i]);
+                $(o).html("<option>"+manufacturerlist[i]+"</option>");
+                $gyarto.append(o);
+            } 
+        }
+    });
     $.ajax({
         type:"GET",
         url: "https://webtechcars.herokuapp.com/api/cars",
-        
         success: function(data){
             for(var i in data){
                 if(data[i].avaiable in window)$database.append("<li data-id="+data[i]._id+"><p> Név: <span class='noedit name'>"+data[i].name+"</span><input class='edit name'/></p><p> Fogyasztás: <span class='noedit consumption'>"+data[i].consumption+"</span><input class='edit consumption'/> </p><p> Színe: <span class='noedit color'>"+data[i].color+"</span><input class='edit color'/></p><p> Gyártó: <span class='noedit manufacturer'>"+data[i].manufacturer+"</span><input class='edit manufacturer'/></p><p> Elérhető: <span class='noedit available'>"+data[i].available+"</span><input class='edit available'/></p><p> Évjárat: <span class='noedit year'>"+data[i].year+"</span><input class='edit year'/></p><p id='last' > Lóerő: <span class='noedit horsepower'>"+data[i].horsepower+"</span><input class='edit horsepower'/></p> <div class='buttons'><button class='editData noedit'>Edit</button><button class='saveEdit edit'>Save</button><button class='cancelEdit edit'>Cancel</button></div><button id='del' data-id='"+data[i]._id+"' class='remove'>X</button></li>").hide().fadeIn(300);
@@ -31,7 +44,6 @@ $(document).ready(function(){
                 "year":$gyartasiev.val(),
                 "horsepower":$loero.val()
         });
-        
         $.ajax({
             type: "POST",
             url:"https://webtechcars.herokuapp.com/api/cars",
@@ -50,10 +62,9 @@ $(document).ready(function(){
                 });
             },
             error:function () {
-                alert("fuck");
-              }
+                alert("hoppá");
+            }
         });
-    
     });
     $database.delegate(".remove","click",function() {
         var $li = $(this).closest('li');

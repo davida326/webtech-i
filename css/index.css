@@ -23,7 +23,7 @@
     margin-left: 300px;
     top: 250px;
     right:150px;
-    padding-right: 100px;
+    padding-right: 150px;
     border: 5px solid black;
     background-color: black;
     color: white;
@@ -65,7 +65,7 @@
     margin-left: auto;
     margin-right: auto;
     height: 100%;
-    width: 700px;
+    width: 100%;
     text-align: center;
     color: black;
 }
@@ -74,7 +74,7 @@
     margin-left: auto;
     margin-right: auto;
     height: 100%;
-    width: 700px;
+    width: 100%;
     text-align: center;
     color: black;
 }
@@ -105,7 +105,7 @@
     margin-top:0%;
 }
 #database{
-    margin-left: -50px;
+    margin-left: 20px;
     list-style-type: none;
     text-align: center;   
 }
@@ -187,4 +187,8 @@ ul li.edit .edit{
 }
 ul li.edit .noedit{
     display: none;
+}
+#gyarto{
+    height: 20px;
+    width: 115px;
 }
